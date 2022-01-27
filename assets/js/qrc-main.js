@@ -1,9 +1,9 @@
 (function ($) {
-	alert("before");
+	// alert("before");
 	$(document).ready(function () {
-		alert("before minitoggle");
+		// alert("before minitoggle");
 		$(".toggle").minitoggle();
-		alert("after");
+		// alert("after");
 
 		console.log("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
 	});
