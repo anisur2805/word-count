@@ -70,9 +70,11 @@ function qrc_qrcode_admin_init() {
 
 function qrc_toggle_cb() {
  $option = get_option( 'qrc_toggle' );
+ 
+ echo "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" .$option;
 
- echo '<div class="toggle" id="qrc_toggle"></div>';
- echo '<input type="hidden" name="qrc_toggle" value="' . $option . '" />';
+ echo '<div class="toggle" id="qrc_tgl"></div>';
+ echo '<input type="hidden" id="qrc_toggle" name="qrc_toggle" value="' . $option . '" />';
 }
 
 add_action( 'admin_init', 'qrc_qrcode_admin_init' );
@@ -115,11 +117,13 @@ function qrc_countries_checkbox_cb() {
 }
 
 function qrc_assets( $screen ) {
-//  if ( 'options-general.php' == $screen ) {
- wp_enqueue_style( 'qrc-minitoggle', plugin_dir_url( __FILE__ ) . '/assets/css/minitoggle.css' );
- wp_enqueue_script( 'qrc-minitoggle-js', plugin_dir_url( __FILE__ ) . '/assets/js/minitoggle.js', array( 'jquery' ), '1.0', true );
- wp_enqueue_script( 'qrc-main-js', plugin_dir_url( __FILE__ ) . '/assets/js/qrc-main.js', array( 'jquery', 'qrc-minitoggle-js' ), time(), true );
-//  }
+ if ( 'options-general.php' == $screen ) {
+  wp_enqueue_style( 'qrc-minitoggle', WC_DIR_URL_ADMIN . '/css/minitoggle.css' );
+//   wp_dequeue_script('jquery');
+  wp_enqueue_script( 'jquery2', '//code.jquery.com/jquery-3.2.1.slim.min.js', null, '3.2.1', true );
+  wp_enqueue_script( 'qrc-minitoggle-js', WC_DIR_URL_ADMIN . '/js/minitoggle.js', array( 'jquery2' ), '1.0', true );
+  wp_enqueue_script( 'qrc-main-js', WC_DIR_URL_ADMIN . '/js/qrc-main.js', array( 'jquery2', 'qrc-minitoggle-js' ), time(), true );
+ }
 }
 
 add_action( 'admin_enqueue_scripts', 'qrc_assets' );

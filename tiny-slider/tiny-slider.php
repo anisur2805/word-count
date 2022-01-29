@@ -7,9 +7,9 @@ function ts_image_size() {
 add_action( 'init', 'ts_image_size' );
 
 function ts_assets() {
-	wp_enqueue_style( 'ts-style', plugin_dir_url( __FILE__ ) . '../assets/css/tiny-slider.css', '1.0' );
-	wp_enqueue_script( 'ts-script', plugin_dir_url( __FILE__ ) . '../assets/js/tiny-slider.js', null, '1.0', true );
-	wp_enqueue_script( 'ts-main', plugin_dir_url( __FILE__ ) . '../assets/js/tn-main.js', array( 'ts-script' ), '1.0', true );
+	wp_enqueue_style( 'ts-style', WC_DIR_URL_PUBLIC . '/css/tiny-slider.css', '1.0' );
+	wp_enqueue_script( 'ts-script', WC_DIR_URL_PUBLIC . '/js/tiny-slider.js', null, '1.0', true );
+	wp_enqueue_script( 'ts-main', WC_DIR_URL_PUBLIC . '/js/tn-main.js', array( 'ts-script' ), '1.0', true );
 }
 
 add_action( 'wp_enqueue_scripts', 'ts_assets' );
