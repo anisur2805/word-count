@@ -11,6 +11,7 @@ class OMBMetaBox {
   add_action( 'admin_menu', array( $this, 'omb_metabox' ) );
   add_action( 'save_post', array( $this, 'omb_save_metabox' ) );
   add_action( 'save_post', array( $this, 'omb_save_image_metabox' ) );
+  add_action( 'save_post', array( $this, 'omb_save_gallery_metabox' ) );
   add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
  }
 
@@ -60,6 +61,19 @@ class OMBMetaBox {
 
  }
 
+ public function omb_save_gallery_metabox( $post_id ) {
+  if ( !$this->is_secured( 'omb_gallery_nonce_field', 'omb_gallery_action', $post_id ) ) {
+   return $post_id;
+  }
+
+  $images_id  = isset( $_POST['obm_images_id'] ) ? $_POST['obm_images_id'] : '';
+  $images_url = isset( $_POST['obm_images_url'] ) ? $_POST['obm_images_url'] : '';
+
+  update_post_meta( $post_id, 'obm_images_id', $images_id );
+  update_post_meta( $post_id, 'obm_images_url', $images_url );
+
+ }
+ 
  public function omb_save_metabox( $post_id ) {
 
   if ( !$this->is_secured( 'omb_location_field', 'omb_location', $post_id ) ) {
@@ -95,22 +109,23 @@ class OMBMetaBox {
  public function omb_metabox() {
   add_meta_box( 'omb_metabox', __( 'Metabox', 'omb-metabox' ), array( $this, 'omb_render_metabox' ), 'post', 'advanced' );
   add_meta_box( 'omb_image_info', __( 'Image Info', 'omb-metabox' ), array( $this, 'omb_render_image' ), 'post', 'advanced' );
+  add_meta_box( 'omb_gallery_info', __( 'Gallery Info', 'omb-metabox' ), array( $this, 'omb_render_images' ), 'post', 'advanced' );
  }
 
  public function omb_render_image( $post ) {
   $image_id  = get_post_meta( $post->ID, 'obm_image_id', true );
   $image_url = get_post_meta( $post->ID, 'obm_image_url', true );
-  
+
 //   echo "<pre>";
-// 	  var_dump($image_id);
-//   die();
+  //    var_dump($image_id);
+  //   die();
 
   $label = __( 'Upload Image', 'omb-metabox' );
   wp_nonce_field( 'omb_image_action', 'omb_image_nonce_field' );
 
   $image_info_html = <<<EOD
 		<div id="myImageMetaBox">
-		<label for="obm_location">{$label}</label>
+		<label>{$label}</label>
 		<button class="button" id="upload_image">{$label}</button>
 		<button class="hidden button" name="obm_image_remove" id="delete_custom_img">Remove Image</button>
 		<input type="hidden" name="obm_image_id" id="obm_image_id" value={$image_id} />
@@ -120,6 +135,25 @@ EOD;
   echo $image_info_html;
  }
 
+ public function omb_render_images( $post ) {
+  $images_id  = get_post_meta( $post->ID, 'obm_images_id', true );
+  $images_url = get_post_meta( $post->ID, 'obm_images_url', true );
+
+  $label = __( 'Gallery Images', 'omb-metabox' );
+  wp_nonce_field( 'omb_gallery_action', 'omb_gallery_nonce_field' );
+
+  $image_info_html = <<<EOD
+		<div id="myGalleryMetaBox">
+		<label>{$label}</label>
+		<button class="button" id="upload_images">{$label}</button>
+		<button class="hidden button" name="obm_images_remove" id="delete_custom_images">Remove Image</button>
+		<input type="hidden" name="obm_images_id" id="obm_images_id" value={$images_id} />
+		<input type="hidden" name="obm_images_url" id="obm_images_url" value={$images_url} />
+		<div id="gallery_container"></div></div>
+EOD;
+  echo $image_info_html;
+ }
+ 
  public function omb_render_metabox( $post ) {
   $location = get_post_meta( $post->ID, 'obm_location', true );
   $country  = get_post_meta( $post->ID, 'obm_country', true );

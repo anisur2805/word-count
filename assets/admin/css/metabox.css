@@ -1,9 +1,14 @@
+#gallery_container img {
+	max-width: 200px;
+	height: auto;
+	margin-right: 10px;	
+}
 #image_container img {
 	max-width: 300px;
 	height: auto;
 	margin-top: 12px;
 }
-
+#myGalleryMetaBox label,
 #myImageMetaBox label {
     margin: 0 10px -10px 0;
     display: inline-block;
