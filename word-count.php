@@ -25,6 +25,7 @@ define("WC_DIR_URL_ADMIN", WC_DIR_URL . "/admin" );
 include_once "posts-to-qr.php";
 include_once "tiny-slider/tiny-slider.php";
 include_once "class-metabox.php";
+include_once "meta-fields-texanomy.php";
 
 /**
  * Load plugin text-date_interval_create_from_date_string

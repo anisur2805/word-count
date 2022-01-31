@@ -77,8 +77,7 @@ var frame;
 		images_url = images_url ? images_url.split(";") : [];
 		for (var i in images_url) {
 			let _image_url = images_url[i];
-			// console.log("Splitted img ", _image_url);
-			gImgContainer.html(`<img style="margin-right: 10px;" src='${_image_url}' />`);
+			gImgContainer.append(`<img style="margin-right: 10px;" src='${_image_url}' />`);
 		}
 
 		// Gallery image
@@ -108,8 +107,6 @@ var frame;
 				// Get media attachment details from the frame state
 				let attachments = gFrame.state().get("selection").toJSON();
 
-				// console.log("attachments", attachments);
-
 				for (i in attachments) {
 					var attachment = attachments[i];
 					
@@ -117,7 +114,7 @@ var frame;
 					images_ids.push(attachment.id);
 					images_urls.push(attachment.url);
 					// Send the attachment URL to our custom image input field.
-					gImgContainer.html(`<img  style="margin-right: 0px;" src='${attachment.sizes.full.url}' />`);
+					gImgContainer.append(`<img style="margin-right: 10px;" src='${attachment.sizes.full.url}' />`);
 
 					// Hide the add image link
 					gAddImgLink.addClass("hidden");
@@ -125,7 +122,6 @@ var frame;
 					// Unhide the remove image link
 					gDelImgLink.removeClass("hidden");
 				}
-				// console.log("ids: ", images_ids, "urls: ", images_urls);
 
 				gImgIdInput.val(images_ids.join(";"));
 				gImgURLInput.val(images_urls.join(";"));

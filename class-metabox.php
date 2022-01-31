@@ -73,7 +73,7 @@ class OMBMetaBox {
   update_post_meta( $post_id, 'obm_images_url', $images_url );
 
  }
- 
+
  public function omb_save_metabox( $post_id ) {
 
   if ( !$this->is_secured( 'omb_location_field', 'omb_location', $post_id ) ) {
@@ -116,10 +116,6 @@ class OMBMetaBox {
   $image_id  = get_post_meta( $post->ID, 'obm_image_id', true );
   $image_url = get_post_meta( $post->ID, 'obm_image_url', true );
 
-//   echo "<pre>";
-  //    var_dump($image_id);
-  //   die();
-
   $label = __( 'Upload Image', 'omb-metabox' );
   wp_nonce_field( 'omb_image_action', 'omb_image_nonce_field' );
 
@@ -153,7 +149,7 @@ EOD;
 EOD;
   echo $image_info_html;
  }
- 
+
  public function omb_render_metabox( $post ) {
   $location = get_post_meta( $post->ID, 'obm_location', true );
   $country  = get_post_meta( $post->ID, 'obm_country', true );
