@@ -20,13 +20,14 @@ if ( !defined( 'ABSPATH' ) ) {
 // Constant Variables
 define("WC_DIR_URL", plugin_dir_url( __FILE__ ) . "assets");
 define("WC_DIR_URL_PUBLIC", WC_DIR_URL . "/public" );
-define("WC_DIR_URL_ADMIN", WC_DIR_URL . "/admin" );
+define("WC_DIR_URL_ADMIN", WC_DIR_URL . "/admin" ); 
 
 include_once "posts-to-qr.php";
 include_once "tiny-slider/tiny-slider.php";
 include_once "class-metabox.php";
 include_once "class-select-page-metabox.php";
 include_once "meta-fields-texanomy.php"; 
+include_once "posts-list-table.php"; 
 
 /**
  * Load plugin text-date_interval_create_from_date_string
