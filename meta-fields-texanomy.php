@@ -142,18 +142,18 @@ add_filter( 'manage_edit-post_tag_sortable_columns', 'wc_manage_sortable_columns
  * @since   1.0.0
  */
 
-if( !function_exists( 'wc_terms_clauses' ) ) {
-	function wc_terms_clauses( $pieces, $taxonomies, $args ) {
-		global $wpdb;
+// if( !function_exists( 'wc_terms_clauses' ) ) {
+// 	function wc_terms_clauses( $pieces, $taxonomies, $args ) {
+// 		global $wpdb;
 		
-		$orderby = isset( $_REQUEST['orderby']) ? trim( wp_unslash( $_REQUEST['orderby']) ) : 'selected_page';
-		if( $orderby == 'selected_page') {
-			$pieces['fields'] .= ", trm.*";
-			$pieces['join'] .= " INNER JOIN {$wpdb->termmeta} AS trm ON tt.term_id = trm.term_id";
-			$pieces['orderby'] = "ORDER BY trm.meta_value";
-		}
+// 		$orderby = isset( $_REQUEST['orderby']) ? trim( wp_unslash( $_REQUEST['orderby']) ) : 'selected_page';
+// 		if( $orderby == 'selected_page') {
+// 			$pieces['fields'] .= ", trm.*";
+// 			$pieces['join'] .= " INNER JOIN {$wpdb->termmeta} AS trm ON tt.term_id = trm.term_id";
+// 			$pieces['orderby'] = "ORDER BY trm.meta_value";
+// 		}
 		
-		return $pieces;
-	}
-}
-add_filter( 'terms_clauses', 'wc_terms_clauses', 10, 3 );
+// 		return $pieces;
+// 	}
+// }
+// add_filter( 'terms_clauses', 'wc_terms_clauses', 10, 3 );
