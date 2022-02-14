@@ -14,7 +14,7 @@ class OptionsDemoPageTwo {
       }
       
       public function optionsdemo_save_form() {
-            check_admin_referer('optionsdemo');
+            check_admin_referer('optionsdemo'); 
             
             if( isset( $_POST['optionsdemo_latitude'])) {
                   update_option('optionsdemo_latitude', sanitize_text_field($_POST['optionsdemo_latitude']));

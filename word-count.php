@@ -31,6 +31,7 @@ include_once "posts-list-table.php";
 include_once "options-demo.php";
 include_once "options-demo-two.php";
 include_once "quick-tags.php";
+include_once "recipe-cpt.php";
 
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'plugin_action_links');
 function plugin_action_links($links) {
