@@ -33,6 +33,9 @@ include_once "options-demo-two.php";
 include_once "quick-tags.php";
 include_once "recipe-cpt.php";
 
+// Widgets file load 
+require_once "widgets/widgets.php"; 
+
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'plugin_action_links');
 function plugin_action_links($links) {
 	$newLink = sprintf("<a href='%s'>%s</a>", 'options-general.php?page=options_demo_page', __('Settings', 'options-demo'));
