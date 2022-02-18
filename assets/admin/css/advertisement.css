@@ -1,0 +1,17 @@
+.button-add-media {
+	background-color: #f0f0f1;
+	color: #2c3338;
+	border: 1px dashed #c3c4c7;
+	box-sizing: border-box;
+	cursor: pointer;
+	line-height: 1.6;
+	padding: 9px 0;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+
+#ad_image_preview img {
+	max-width: 300px;
+	height: auto;
+}

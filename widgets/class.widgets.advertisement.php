@@ -11,48 +11,61 @@ class AdvertisementWidget extends WP_Widget {
       }
 
       public function form($instance) {
-            $title     = isset($instance['title']) ? $instance['title'] : __('Advertisement Block', 'advertisement-widget');
-            $ad_image  = isset($instance['ad_image']) ? $instance['ad_image'] : 40.12;
-            $ad_url = isset($instance['ad_url']) ? $instance['ad_url'] : 80.42;
-?>
+
+            $ad_title     = isset($instance['ad_title']) ? $instance['ad_title'] : __('Advertisement Block', 'advertisement-widget');
+            $ad_image  = isset($instance['ad_image']) ? $instance['ad_image'] : '';
+            $ad_url = isset($instance['ad_url']) ? $instance['ad_url'] : 'https://google.com/';
+
+            ?>
             <p>
-                  <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title', 'advertisement-widget'); ?></label>
-                  <input class="widefat" type="text" name="<?php echo esc_attr($this->get_field_name('title')); ?>" id="<?php echo esc_attr($this->get_field_id('title')); ?>" value="<?php echo esc_attr($title); ?>" />
-            </p>
-            <p>
-                  <label for="<?php echo esc_attr($this->get_field_id('latitude')); ?>"><?php _e('Image', 'advertisement-widget'); ?></label>
-                  <input class="widefat" type="number" name="<?php echo esc_attr($this->get_field_name('latitude')); ?>" id="<?php echo esc_attr($this->get_field_id('latitude')); ?>" value="<?//php echo esc_attr($latitude); ?>" />
-            </p>
-            <p>
-                  <label for="<?php echo esc_attr($this->get_field_id('ad_url')); ?>"><?php _e('URL', 'advertisement-widget'); ?></label>
-                  <input class="widefat" type="url" name="<?php echo esc_attr($this->get_field_name('ad_url')); ?>" id="<?php echo esc_attr($this->get_field_id('ad_url')); ?>" value="<?php echo esc_attr($ad_url); ?>" />
+                  <label for="<?php echo esc_attr($this->get_field_id('ad_title')); ?>"><?php _e('Title', 'demo-widget'); ?></label>
+                  <input class="widefat" type="text" name="<?php echo esc_attr($this->get_field_name('ad_title')); ?>" id="<?php echo esc_attr($this->get_field_id('ad_title')); ?>" value="<?php echo esc_attr($ad_title); ?>" />
             </p>
 
-      <?php
+            <div>
+                  <label for="<?php echo esc_attr($this->get_field_id('ad_image')); ?>"><?php _e('Advertisement Image', 'advertisement-widget'); ?></label>
+                  <p id="ad_image_preview"></p>
+                  <input class="imgph" type="hidden" id="<?php echo esc_attr($this->get_field_id('ad_image')); ?>" name="<?php echo esc_attr($this->get_field_name('ad_image')); ?>" value="<?php echo esc_attr($ad_image); ?>" />
+                  <input type="button" class="button-add-media" id="ad_image_upload" value="<?php _e('Add Image', 'advertisement-widget'); ?>" />
+
+            </div>
+            <p>
+                  <label for="<?php echo esc_attr($this->get_field_id('ad_url')); ?>"><?php _e('URL', 'advertisement-widget'); ?></label>
+                  <input class="widefat" type="url" name="<?php echo esc_attr($this->get_field_name('ad_url')); ?>" id="<?php echo esc_attr($this->get_field_id('ad_url')); ?>" value="<?php echo esc_url($ad_url); ?>" />
+            </p>
+
+
+            <?php
       }
 
       public function widget($args, $instance) {
-
-            $title = apply_filters('widget_title', $instance['title']);
+            
+            $ad_title = apply_filters('widget_title', $instance['ad_title']);
+            $ad_url = isset($instance['ad_url']) ? $instance['ad_url'] : '';
+            $ad_id = isset($instance['ad_image']) ? $instance['ad_image'] : '';
+            $ad_img_url = wp_get_attachment_image_src($ad_id);
+            
             echo $args['before_widget'];
-            if (!empty($title)) {
-                  echo $args['before_title'] . $title . $args['after_title'];
+            if (!empty($ad_title)) {
+                  echo $args['before_title'] . $ad_title . $args['after_title'];
             }
-      ?>
+            ?>
             <div class="advertisement-widget">
-                  <p>Latitude: <?php echo isset($instance['latitude']) ? $instance['latitude'] : ''; ?></p>
-                  <p>Longitude: <?php echo isset($instance['ad_url']) ? $instance['longitude'] : ''; ?></p>
-                  <p>Email: <?php echo isset($instance['email']) ? $instance['email'] : ''; ?></p>
+                  <a target="_blank" href="<?php echo esc_url($ad_url); ?>">
+                        <h3><?php echo esc_attr($ad_title); ?></h3>
+                        <img src="<?php echo esc_url($ad_img_url[0]); ?>" alt="Test" />
+                  </a>
             </div>
-<?php
+            <?php
             echo $args['after_widget'];
       }
 
       public function update($new_instance, $old_instance) {
+
             $instance = array();
-            $instance['title'] = sanitize_text_field($instance['title']);
-            $instance['ad_image'] = sanitize_text_field($instance['ad_image']);
-            $instance['ad_url'] = sanitize_text_field($instance['ad_url']);
+            $instance['ad_title'] = sanitize_text_field($new_instance['ad_title']);
+            $instance['ad_image'] = sanitize_text_field($new_instance['ad_image']);
+            $instance['ad_url'] = sanitize_text_field($new_instance['ad_url']);
 
             return $instance;
       }

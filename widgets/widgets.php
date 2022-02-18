@@ -12,6 +12,7 @@ function advertisement_assets($screen) {
       if ('widgets.php' == $screen) {
             wp_enqueue_media();
             wp_enqueue_script('advertisement-script', WC_DIR_URL_ADMIN .'/js/advertisement.js', array('jquery'), time(), true);
+            wp_enqueue_style('advertisement-style', WC_DIR_URL_ADMIN .'/css/advertisement.css', time() );
       }
 }
 add_action('admin_enqueue_scripts', 'advertisement_assets');
