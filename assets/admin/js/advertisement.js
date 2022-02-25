@@ -100,6 +100,8 @@
 			$(".imgph").each(function () {
 				var attrId = $(this).val();
 				var container = $(this).prev();
+				container.html("");
+				
 				if (attrId) {
 					$(this).next().val("Change Image");
 					var attachment = new wp.media.model.Attachment.get(attrId);
@@ -113,6 +115,17 @@
 					});
 				}
 			});
+		}
+		
+		// check we are in customize mood
+		if(wp.customize !== undefined) {
+			$('.customize-control').on('expand', function () {
+				var widget_id = $(this).attr('id');
+				if( widget_id.indexOf('widget_advertisement')) {
+					prefetch();
+				}
+				
+			})
 		}
 		prefetch();
 	});
