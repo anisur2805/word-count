@@ -32,6 +32,7 @@ include_once "options-demo.php";
 include_once "options-demo-two.php";
 include_once "quick-tags.php";
 include_once "recipe-cpt.php";
+include_once "data-table/class-data-table.php";
 
 // Widgets file load 
 require_once "widgets/widgets.php"; 
