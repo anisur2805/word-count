@@ -8,8 +8,9 @@ add_action( 'init', 'ts_image_size' );
 
 function ts_assets() {
 	wp_enqueue_style( 'ts-style', WC_DIR_URL_PUBLIC . '/css/tiny-slider.css', '1.0' );
-	wp_enqueue_script( 'ts-script', WC_DIR_URL_PUBLIC . '/js/tiny-slider.js', null, '1.0', true );
-	wp_enqueue_script( 'ts-main', WC_DIR_URL_PUBLIC . '/js/tn-main.js', array( 'ts-script' ), '1.0', true );
+	wp_enqueue_script( 'ts-script', WC_DIR_URL_PUBLIC . '/js/tiny-slider.js', null, '2.9.2', true );
+	wp_enqueue_script( 'ts-script', WC_DIR_URL_PUBLIC . '/js/tiny-slider.js', null, '2.9.2', true );
+	wp_enqueue_script( 'ts-main', WC_DIR_URL_PUBLIC . '/js/tn-main.js', array( 'ts-script' ), time(), true );
 }
 
 add_action( 'wp_enqueue_scripts', 'ts_assets' );
@@ -26,7 +27,7 @@ function ts_sliders( $args, $content = null ) {
 
 	return <<<EOD
 <div class="my-slider" id="{$attrs['id']}" style="width: {$attrs['width']}px; height: {$attrs['height']}px;">
-	<div class="slider">
+	<div class="slider" id="my_slider">
 	 {$content}
 	</div>
 	
