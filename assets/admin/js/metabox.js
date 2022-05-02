@@ -1,5 +1,5 @@
 var frame;
-(function ($) {
+(function ($) { alert("hello")
 	// Set all variables to be used in scope
 	var frame,
 		gFrame,

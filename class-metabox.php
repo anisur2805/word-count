@@ -16,10 +16,12 @@ class OMBMetaBox {
     add_action('admin_enqueue_scripts', array($this, 'admin_assets'));
   }
 
-  public function admin_assets() {
-    wp_enqueue_style('metabox-style', WC_DIR_URL_ADMIN . '/css/metabox.css', time());
-    wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css');
-    wp_enqueue_script('omb-metabox-js', WC_DIR_URL_ADMIN . '/js/metabox.js', array('jquery', 'jquery-ui-datepicker'), time(), true);
+  public function admin_assets( $hook ) {
+    if('post-new.php' == $hook || 'post.php' == $hook ) {
+      wp_enqueue_style('metabox-style', WC_DIR_URL_ADMIN . '/css/metabox.css', time());
+      wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css');
+      wp_enqueue_script('omb-metabox-js', WC_DIR_URL_ADMIN . '/js/metabox.js', array('jquery', 'jquery-ui-datepicker'), time(), true);
+    }
   }
 
   private function is_secured($nonce_field, $action, $post_id) {
